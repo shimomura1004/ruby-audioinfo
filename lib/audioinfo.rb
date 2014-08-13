@@ -266,6 +266,21 @@ class AudioInfo
     end
   end
 
+  def picture
+    case @info
+    when Mp3Info
+      if not @info.tag2.pictures.empty?
+        @info.tag2.pictures[0][1]
+      elsif @info.tag2['PIC']
+        @info.tag2['PIC']
+      end
+    when MP4Info
+      @info.COVR
+    else
+      nil
+    end
+  end
+
   # hash-like access to tag
   def [](key)
     @hash[key]
